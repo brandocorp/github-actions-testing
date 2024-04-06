@@ -1,11 +1,13 @@
 ---
+name: pr-workflow-merged
+
 on:
   pull_request:
     types:
       - closed
 
 jobs:
-  pr-merged:
+  on-merge:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true
     steps:
