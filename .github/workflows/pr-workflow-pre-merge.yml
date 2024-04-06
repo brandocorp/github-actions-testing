@@ -1,0 +1,26 @@
+---
+on:
+  pull_request:
+    types:
+      - opened
+
+
+jobs:
+  pre-merge-check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Check For Version Update
+        id: pr-version-check
+        run: |
+          git fetch origin ${{ github.event.pull_request.base.ref }}
+          VERSION_UPDATED="$(git diff --name-only origin/${{ github.base_ref }}..HEAD -- 'version')"
+          if [ -z $VERSION_UPDATED ]; then
+            echo "Version file not updated"
+            gh pr comment ${{ github.event.number }} --body "$PR_COMMENT_WARNING"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_COMMENT_WARNING: |
+            Warning: This PR does not update the version file.
