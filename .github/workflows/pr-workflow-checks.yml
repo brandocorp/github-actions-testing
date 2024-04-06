@@ -1,4 +1,6 @@
 ---
+name: pr-workflow-checks
+
 on:
   pull_request:
     types:
@@ -28,3 +30,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PR_COMMENT_WARNING: |
             Warning: This PR does not update the version file.
+
+      - name: Check For Change Log Update
+        id: pr-changelog-check
+        run: |
+          git fetch origin ${{ github.event.pull_request.base.ref }}
+          CHANGELOG_UPDATED="$(git diff --name-only origin/${{ github.base_ref }}..HEAD -- 'CHANGELOG.md')"
+          if [ -z $CHANGELOG_UPDATED ]; then
+            echo "Version file not updated"
+            gh pr comment ${{ github.event.number }} --body "$PR_COMMENT_WARNING"
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_COMMENT_WARNING: |
+            Warning: This PR does not update the change log file.
