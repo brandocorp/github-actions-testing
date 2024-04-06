@@ -1,0 +1,11 @@
+---
+on:
+  push:
+
+jobs:
+  new-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: New Commit
+        run: |
+          echo "New Commit: ${{ github.sha }}"
