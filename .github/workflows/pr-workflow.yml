@@ -1,0 +1,16 @@
+---
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  pull-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Pull Request
+        run: |
+          echo "A PR was opened or updated."
+          echo "The PR is ${{ github.ref_name }}"
+          echo "The target branch is ${{ github.base_ref }}"
+          echo "The source branch is ${{ github.head_ref }}"
