@@ -1,4 +1,6 @@
 ---
+name: pr-workflow
+
 on:
   pull_request:
     branches:
