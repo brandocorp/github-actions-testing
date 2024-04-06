@@ -5,6 +5,11 @@ on:
     paths:
       - version
 
+permissions:
+  contents: write
+  id-token: write
+  actions: write
+
 jobs:
   create-release:
     runs-on: ubuntu-latest

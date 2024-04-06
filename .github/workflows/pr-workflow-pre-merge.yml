@@ -4,6 +4,10 @@ on:
     types:
       - opened
 
+permissions:
+  contents: write
+  id-token: write
+  actions: write
 
 jobs:
   pre-merge-check:
