@@ -1,0 +1,18 @@
+---
+on:
+  release:
+    types: [created]
+
+jobs:
+  release-created:
+    runs-on: ubuntu-latest
+    steps:
+      - name: New Release
+        run: |
+          echo "New release created"
+          echo "Release tag: ${{ github.event.release.tag_name }}"
+          echo "Release name: ${{ github.event.release.name }}"
+          echo "Release body: ${{ github.event.release.body }}"
+          echo "Release author: ${{ github.event.release.author.login }}"
+          echo "Release author email: ${{ github.event.release.author.email }}"
+          echo "Release author name: ${{ github.event.release.author.name }}"
