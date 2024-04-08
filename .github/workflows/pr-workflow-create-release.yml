@@ -25,4 +25,4 @@ jobs:
           VERSION=$(cat version)
           gh release create "v$VERSION" --title "v$VERSION" --notes "Release v$VERSION" --repo $GITHUB_REPOSITORY
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.PERSONAL_TOKEN }}
