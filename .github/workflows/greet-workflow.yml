@@ -13,14 +13,13 @@ jobs:
         with:
           github-token: ${{ secrets.PERSONAL_TOKEN }}
           script: |
-            const in = {
-              name: 'GitHub'
-            };
-
-            await github.rest.actions.createWorkflowDispatch({
+            const workflow = await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
               repo: context.repo.repo,
               workflow_id: 'dispatch-greeting.yml',
               ref: 'main',
-              inputs: in
+              inputs: {
+                name: 'GitHub'
+              }
             })
+            console.log(workflow)
