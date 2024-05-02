@@ -1,0 +1,25 @@
+name: Greet Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  greet:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v6
+        with:
+          github-token: ${{ secrets.PERSONAL_TOKEN }}
+          script: |
+            const workflow = await github.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'dispatch-greeting.yml',
+              ref: 'main',
+              inputs: {
+                name: 'GitHub'
+              }
+            })
+            console.log(workflow)
