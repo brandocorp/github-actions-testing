@@ -19,7 +19,7 @@ jobs:
               workflow_id: 'dispatch-greeting.yml',
               ref: 'main',
               inputs: {
-                name: 'GitHub'
+                data: '{ "name":"GitHub" }'
               }
             })
             console.log(workflow)
